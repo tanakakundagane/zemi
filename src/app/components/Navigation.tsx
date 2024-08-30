@@ -1,6 +1,9 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaBars } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
+import { FaChevronRight } from "react-icons/fa";
 
 const navigationMenu = [
   {
@@ -26,6 +29,8 @@ const navigationMenu = [
 ]
 
 const Navigation = () => {
+  const [navOpen , setNavOpen] = useState(true);
+
   return (
     <>
       {/* WEBメニュー */}
@@ -71,11 +76,30 @@ const Navigation = () => {
 
 
       {/* モバイルメニュー */}
-      <div>
-        <div>
-          <div>
-            <div>
-              <button></button>
+      <div className={navOpen ? "py-0 block w-screen z-[999]":"hidden"}>
+        <div className='h-screen w-screen z-[999] top-0 fixed bg-black bg-opacity-50'>
+          <div className='h-screen bg-white w-[300px] top-0 right-0 z-[999] fixed'>
+            <div className='h-14 px-10 border-b flex items-center'>
+              <button className='flex items-center space-x-3'>
+                <IoClose/>
+                <span>閉じる</span>
+              </button>
+            </div>
+            <div className='h-full py-3 px-10 pb-20'>
+              <ul className='blok mb-7'>
+                {navigationMenu.map((item,index) => (
+                  <li key={index}>
+                    <Link href={item.href} className='group flex items-center py-2 duration-300 transition-all ease-out hover:text-green'>
+                      <span>{item.label}</span>
+                      <span 
+                          className='relative left-2 duration-300 transition-all ease-in-out opacity-0 group-hover:opacity-100 group-hover:left-3'
+                        >
+                          <FaChevronRight className='text-xl'/>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
