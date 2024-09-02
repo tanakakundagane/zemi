@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { FaChevronRight } from "react-icons/fa";
@@ -29,7 +29,53 @@ const navigationMenu = [
 ]
 
 const Navigation = () => {
-  const [navOpen , setNavOpen] = useState(true);
+  const [navOpen , setNavOpen] = useState(false);
+
+  const mobileMenuHandler = () => {
+    setNavOpen(!navOpen)
+  };
+
+  //768以上になると閉じる
+  const [mobile, setMobile] = useState<{ height: number; width: number } | null>(null);
+  // useEffect(() => {
+  //   function handleResize(){
+  //     setMobile({
+  //       height:window.innerHeight,
+  //       width:window.innerWidth
+  //     })
+  //     if(mobile?.width > 768 && navOpen){
+  //       setNavOpen(false)
+  //     }
+  //   }
+  //   window.addEventListener('resize' , handleResize)
+  //   return() =>{
+  //     window.removeEventListener('resize', handleResize)
+  //   }
+  // })
+  useEffect(() => {
+    function handleResize(){
+      const dimensions = {
+        height: window.innerHeight,
+        width: window.innerWidth,
+      };
+      setMobile(dimensions);
+
+      // mobileがnullでないことを確認してからwidthにアクセスする
+      if(dimensions.width > 768 && navOpen){
+        setNavOpen(false);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    
+    // 初回レンダリング時にも実行
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, [navOpen]);
+  
 
   return (
     <>
@@ -66,7 +112,7 @@ const Navigation = () => {
                 申し込み
               </Link>
               {/* モバイル用 */}
-              <button className='block lg:hidden'>
+              <button className='block lg:hidden' onClick={mobileMenuHandler}>
                 <FaBars className='text-4xl'/>
               </button>
             </div>
@@ -76,11 +122,11 @@ const Navigation = () => {
 
 
       {/* モバイルメニュー */}
-      <div className={navOpen ? "py-0 block w-screen z-[999]":"hidden"}>
-        <div className='h-screen w-screen z-[999] top-0 fixed bg-black bg-opacity-50'>
+      <div className={navOpen ? "py-0 block w-screen z-[999]":"hidden"}>{/* useState */}
+        <div className='h-screen w-screen z-[999] top-0 fixed bg-black bg-opacity-50'onClick={mobileMenuHandler}>
           <div className='h-screen bg-white w-[300px] top-0 right-0 z-[999] fixed'>
             <div className='h-14 px-10 border-b flex items-center'>
-              <button className='flex items-center space-x-3'>
+              <button className='flex items-center space-x-3' onClick={mobileMenuHandler}>
                 <IoClose/>
                 <span>閉じる</span>
               </button>
@@ -89,7 +135,9 @@ const Navigation = () => {
               <ul className='blok mb-7'>
                 {navigationMenu.map((item,index) => (
                   <li key={index}>
-                    <Link href={item.href} className='group flex items-center py-2 duration-300 transition-all ease-out hover:text-green'>
+                    <Link href={item.href} className='group flex items-center py-2 duration-300 transition-all ease-out hover:text-green'
+                    onClick={() => setNavOpen(false)}
+                    >
                       <span>{item.label}</span>
                       <span 
                           className='relative left-2 duration-300 transition-all ease-in-out opacity-0 group-hover:opacity-100 group-hover:left-3'
