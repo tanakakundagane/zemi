@@ -10,7 +10,7 @@ const heroContent = {
     subTitle: "ORIGIN.Docゼミ",
     title: "一つ上を目指せる！",
     discription:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas molestias sunt illo dolores hic voluptates placeat pariatur quidem, libero distinctio modi totam, beatae amet, dignissimos corporis optio tenetur quasi vero!",
+      "ようこそ！  未来のために、共に学び、成長しましょう。ORIGIN.Docゼミでは、生徒一人ひとりに合わせたカリキュラムで、確かな学力向上を目指します。私たちは教育のプロフェッショナルが揃い、生徒たちが自信を持ち、自ら考え、進んで学ぶ力を身につけられるようサポートしています。",
   },
   images: {
     img1: "/assets/hero-img-1.jpg",
