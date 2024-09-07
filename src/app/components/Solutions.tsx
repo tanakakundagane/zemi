@@ -37,80 +37,88 @@ const solutionsContent = {
 
 const Solutions = () => {
   return (
-    <section id="solutions">
-      <div>
-        <div>
+    <section id="solutions" className="py-32 bg-light overflow-hidden max-md:py-5">
+      <div className="container px-4 mx-auto flex">
+        <div className="lg:flex space-x-2 justify-between max-md:flex max-md:flex-col">
           {/* 左 */}
-          <div>
-            <div>
-              <div>
+          <div
+            className="lg:w-6/12 relative mb-10 lg:mb-0 z-10 before:content-[' '] before:absolute before:right-1/2 before:w-screen before:rounded-tr-[200px] before:z-[-1] before:rounded-br-3xl before:py-28 before:-top-20 before:bg-white before:-bottom-20
+          max-md:mt-28"
+          >
+            <div className="flex gap-2">
+              <div className="flex flex-col space-y-2">
                 <Image
                   src={solutionsContent.Images.img1}
                   width={626}
                   height={640}
                   alt="img1"
+                  className="object-cover h-full w-full rounded-lg"
                 />
-              </div>
-              <div>
-                {/* 下の段 */}
-                <div>
-                  <div>
-                    <div />
+
+                <div className="flex justify-end gap-2">
+                  {/* 下の段 */}
+                  <div className="w-4/12 flex">
+                    <div className="ml-auto">
+                      <div className="bg-yellowLight w-10 h-10 lg:w-24 lg:h-24 rounded-2xl rounded-bl-[200px] max-md:w-16 max-md:h-16" />
+                    </div>
+                  </div>
+                  <div className="w-6/12">
+                    <Image
+                      src={solutionsContent.Images.img3}
+                      width={626}
+                      height={640}
+                      alt="img3"
+                      className="object-cover h-full w-full rounded-lg"
+                    />
                   </div>
                 </div>
-                <div>
-                  <Image
-                    src={solutionsContent.Images.img3}
-                    width={626}
-                    height={640}
-                    alt="img3"
-                  />
-                </div>
               </div>
-            </div>
 
-            <div>
-              <div>
-                <div>
-                  <div />
-                </div>
-                <div>
-                  <Image
-                    src={solutionsContent.Images.img2}
-                    width={547}
-                    height={573}
-                    alt="img2"
-                  />
-                </div>
-                <div>
+              <div className="mt-auto">
+                <div className="flex flex-col gap-2">
                   <div>
-                    <strong>{solutionsContent.experience.year}</strong>
-                    <span>{solutionsContent.experience.label}</span>
+                    <div className="bg-purpleLight w-10 h-10 lg:w-20 lg:h-20 rounded-tr-[200px] max-md:w-14 max-md:h-14" />
+                  </div>
+                  <div>
+                    <Image
+                      src={solutionsContent.Images.img2}
+                      width={547}
+                      height={573}
+                      alt="img2"
+                      className="object-cover h-full w-full rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <div className="p-4 lg:p-10 shadow-2xl rounded-lg bg-white w-full leading-5">
+                      <strong className="block font-bold text-green text-xl lg:text-5xl">
+                        {solutionsContent.experience.year}
+                      </strong>
+                      <span>{solutionsContent.experience.label}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           {/* 右 */}
-          <div>
-            <span>{solutionsContent.text.subTitle}</span>
-            <h2>{solutionsContent.text.Title}</h2>
-            <p>{solutionsContent.text.discription}</p>
-            <ul>
+          <div className="lg:w-5/12 relative z-10 ">
+            <span className='inline-block py-1 pl-3 text-heading font-semibold relative mb-7 before:content-[""] before:absolute before:w-2/3 before:bg-pinkLight before:left-0 before:top-0 before:bottom-0 before:z-[-10]'>{solutionsContent.text.subTitle}</span>
+            <h2 className="text-heading text-2xl lg:text-4xl font-bold mb-5">{solutionsContent.text.Title}</h2>
+            <p className="text-body leading-relaxed mb-10">{solutionsContent.text.discription}</p>
+            <ul className="grid grid-cols-1 sm:grid-col-2 w-full gap-4 md:gap-5 mb-10">
               {solutionsContent.text.features.map((item, index) => (
-                <li key={index}>
-                  <span>
-                    <FaCheck />
+                <li key={index} className="flex flex-grow items-center space-x-5">
+                  <span className="w-7 h-7 rounded-full bg-green flex items-center justify-center">
+                    <FaCheck className="text-white "/>
                   </span>
                   <span>{item.title}</span>
                 </li>
               ))}
             </ul>
             {/* ボタン */}
-            <div>
-              <Link href={""}>資料ダウンロード</Link>
-              <Link href={""}>申し込み</Link>
+            <div className="flex space-x-3 ">
+              <Link href={""} className="btnGreen">資料ダウンロード</Link>
+              <Link href={""} className="btnGreen">申し込み</Link>
             </div>
           </div>
         </div>
