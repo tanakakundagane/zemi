@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const solutionsContent = {
   text: {
@@ -36,8 +39,19 @@ const solutionsContent = {
 };
 
 const Solutions = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      easing: "slide",
+      once: true,
+    });
+  });
+
   return (
-    <section id="solutions" className="py-32 bg-light overflow-hidden max-md:py-5">
+    <section
+      id="solutions"
+      className="py-32 bg-light overflow-hidden max-md:py-5 max-md:py-5"
+    >
       <div className="container px-4 mx-auto flex">
         <div className="lg:flex space-x-2 justify-between max-md:flex max-md:flex-col">
           {/* 左 */}
@@ -53,6 +67,8 @@ const Solutions = () => {
                   height={640}
                   alt="img1"
                   className="object-cover h-full w-full rounded-lg"
+                  data-aos="fade-right"
+                  data-aos-delay="100"
                 />
 
                 <div className="flex justify-end gap-2">
@@ -69,6 +85,8 @@ const Solutions = () => {
                       height={640}
                       alt="img3"
                       className="object-cover h-full w-full rounded-lg"
+                      data-aos="fade-left"
+                      data-aos-delay="100"
                     />
                   </div>
                 </div>
@@ -86,6 +104,8 @@ const Solutions = () => {
                       height={573}
                       alt="img2"
                       className="object-cover h-full w-full rounded-lg"
+                      data-aos="fade-up"
+                      data-aos-delay="300"
                     />
                   </div>
                   <div>
@@ -101,24 +121,57 @@ const Solutions = () => {
             </div>
           </div>
           {/* 右 */}
-          <div className="lg:w-5/12 relative z-10 ">
-            <span className='inline-block py-1 pl-3 text-heading font-semibold relative mb-7 before:content-[""] before:absolute before:w-2/3 before:bg-pinkLight before:left-0 before:top-0 before:bottom-0 before:z-[-10]'>{solutionsContent.text.subTitle}</span>
-            <h2 className="text-heading text-2xl lg:text-4xl font-bold mb-5">{solutionsContent.text.Title}</h2>
-            <p className="text-body leading-relaxed mb-10">{solutionsContent.text.discription}</p>
-            <ul className="grid grid-cols-1 sm:grid-col-2 w-full gap-4 md:gap-5 mb-10">
+          <div className="lg:w-5/12 relative z-10 max-md:order-first">
+            <span
+              className='inline-block py-1 pl-3 text-heading font-semibold relative mb-7 before:content-[""] before:absolute before:w-2/3 before:bg-pinkLight before:left-0 before:top-0 before:bottom-0 before:z-[-10]'
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              {solutionsContent.text.subTitle}
+            </span>
+            <h2
+              className="text-heading text-2xl lg:text-4xl font-bold mb-5"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              {solutionsContent.text.Title}
+            </h2>
+            <p
+              className="text-body leading-relaxed mb-10"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              {solutionsContent.text.discription}
+            </p>
+            <ul
+              className="grid grid-cols-1 sm:grid-col-2 w-full gap-4 md:gap-5 mb-10"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
               {solutionsContent.text.features.map((item, index) => (
-                <li key={index} className="flex flex-grow items-center space-x-5">
+                <li
+                  key={index}
+                  className="flex flex-grow items-center space-x-5"
+                >
                   <span className="w-7 h-7 rounded-full bg-green flex items-center justify-center">
-                    <FaCheck className="text-white "/>
+                    <FaCheck className="text-white " />
                   </span>
                   <span>{item.title}</span>
                 </li>
               ))}
             </ul>
             {/* ボタン */}
-            <div className="flex space-x-3 ">
-              <Link href={""} className="btnGreen">資料ダウンロード</Link>
-              <Link href={""} className="btnGreen">申し込み</Link>
+            <div
+              className="flex space-x-3 "
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <Link href={""} className="btnGreen">
+                資料ダウンロード
+              </Link>
+              <Link href={""} className="btnGreen">
+                申し込み
+              </Link>
             </div>
           </div>
         </div>
