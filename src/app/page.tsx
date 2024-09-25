@@ -16,6 +16,7 @@ export default function Home() {
       <Solutions />
       <Testimonials />
       <Blog />
+      {/* <Slider/> */}
     </>
   );
 }

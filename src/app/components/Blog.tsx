@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"; 
+import { SwiperRef } from "swiper/react"; // SwiperRef のインポート
 import "swiper/css";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -51,48 +52,60 @@ const blogContent = {
 };
 
 function Blog() {
-  const [isBeginning, setIsBeginning] = useState(null);
-  const [isEnd, setIsEnd] = useState(null);
-  const sliderRef = useRef(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const sliderRef = useRef<SwiperRef | null>(null); // SwiperRefに変更
 
   useEffect(() => {
-    const swiper = sliderRef.current.swiper;
+    if (!sliderRef.current) return;
+
+    const swiper = sliderRef.current.swiper; // Swiperインスタンスへのアクセス
 
     const updateSlideStatus = () => {
+      if (!swiper) return;
       setIsBeginning(swiper.isBeginning);
       setIsEnd(swiper.isEnd);
     };
-    swiper.on("slideChange", updateSlideStatus);
+
+    if (swiper) {
+      swiper.on("slideChange", updateSlideStatus);
+
+      // 初期ステータスを更新
+      updateSlideStatus();
+    }
+
     return () => {
-      swiper.off("slideChange", updateSlideStatus);
+      if (swiper) {
+        swiper.off("slideChange", updateSlideStatus);
+      }
     };
   }, [sliderRef]);
 
-  //前にスライド
+  // 前にスライド
   const prevHandler = useCallback(() => {
     if (!sliderRef.current) return;
-    sliderRef.current.swiper.slidePrev();
+    sliderRef.current.swiper?.slidePrev();
   }, []);
 
   // 次にスライド
   const nextHandler = useCallback(() => {
     if (!sliderRef.current) return;
-    sliderRef.current.swiper.slideNext();
+    sliderRef.current.swiper?.slideNext();
   }, []);
-  //アニメーション
+
+  // アニメーション
   useEffect(() => {
     AOS.init({
       duration: 700,
       easing: "slide",
       once: true,
     });
-  });
+  }, []);
 
   return (
     <section
       id="blog"
-      className="py-20 bg-light overflow-x-hidden
-    max-md:py-10"
+      className="py-20 bg-light overflow-x-hidden max-md:py-10"
     >
       <div className="container px-4 mx-auto">
         <div className="lg:flex justify-between items-center mb-10">
