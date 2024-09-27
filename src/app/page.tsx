@@ -6,6 +6,7 @@ import Solutions from "./components/Solutions";
 import Testimonials from "./components/Testimonials";
 import Blog from "./components/Blog";
 import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -16,7 +17,6 @@ export default function Home() {
       <Solutions />
       <Testimonials />
       <Blog />
-      {/* <Slider/> */}
     </>
   );
 }
